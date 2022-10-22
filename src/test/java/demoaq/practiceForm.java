@@ -10,20 +10,6 @@ import static com.codeborne.selenide.Selenide.*;
 import java.util.ArrayList;
 
 public class practiceForm {
-
-    @Test
-    public static void main(String[] args) {
-        ArrayList<String> cars = new ArrayList<String>();
-        cars.add("Volvo");
-        cars.add("BMW");
-        cars.add("Ford");
-        cars.add("Mazda");
-        for (int i = 0; i < cars.size(); i++) {
-            System.out.println(cars.get(i));
-        }
-    }
-
-
     @BeforeAll
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -40,7 +26,6 @@ public class practiceForm {
         String mobileValue = "1231231231";
         String female = "Female";
         String dataOfBirth = "22 October,2022";
-
 
         // LOCATORS
         String studentRegistrationFormTitle = "Student Registration Form";
