@@ -1,5 +1,4 @@
-package junit5;
-import org.junit.jupiter.api.Assertions;
+package playwright;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.*;
@@ -7,9 +6,10 @@ import com.microsoft.playwright.*;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 
-public class UITest {
+public class UITestPlaywright {
     @Test
-    void check_playwright(){
+    @Tag("playwright")
+    void check_playwright() {
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                     .setHeadless(false));
@@ -40,20 +40,6 @@ public class UITest {
             // Click text=Command line >> nth=0
             page.locator("text=Command line").first().click();
             assertThat(page).hasURL("https://playwright.dev/docs/test-cli");
-        }
-    }
-
-    @Test
-    @Tag("issue-1")
-    void check_playwright32(){
-        try (Playwright playwright = Playwright.create()) {
-            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false));
-            BrowserContext context = browser.newContext();
-            // Open new page
-            Page page = context.newPage();
-            // Go to https://playwright.dev/
-            page.navigate("https://playwright.dev/");
         }
     }
 }
