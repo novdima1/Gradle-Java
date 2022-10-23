@@ -106,9 +106,10 @@ public class practiceForm {
         ((SelenideElement) thanksText).shouldBe(visible);
 
         for (int i = 0; i < label.size(); i++) {
-            String selectorLabel = String.format("tbody tr:nth-child(%s) td:nth-child(%s)", i + 1, 1);
+            String table = "tbody tr:nth-child(%s) td:nth-child(%s)";
+            String selectorLabel = String.format(table, i + 1, 1);
             $(selectorLabel).shouldHave(exactText(label.get(i)));
-            String selectorValue = String.format("tbody tr:nth-child(%s) td:nth-child(%s)", i + 1, 2);
+            String selectorValue = String.format(table, i + 1, 2);
             $(selectorValue).shouldHave(exactText(value.get(i)));
         }
 
