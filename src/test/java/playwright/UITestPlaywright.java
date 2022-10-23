@@ -3,6 +3,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.*;
 
+import java.io.File;
+
+import static com.codeborne.selenide.Selenide.$;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 
@@ -40,6 +43,26 @@ public class UITestPlaywright {
             // Click text=Command line >> nth=0
             page.locator("text=Command line").first().click();
             assertThat(page).hasURL("https://playwright.dev/docs/test-cli");
+        }
+    }
+
+    @Test
+    void tmpTestDemo() {
+        try (Playwright playwright = Playwright.create()) {
+            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
+                    .setHeadless(false));
+            BrowserContext context = browser.newContext();
+            Page page = context.newPage();
+
+            page.navigate("https://demoqa.com/automation-practice-form");
+
+            String dataOfBirthInput = "23 Oct 2022";
+            page.locator("#dateOfBirthInput").click();
+            page.locator("#dateOfBirthInput").fill(dataOfBirthInput);
+
+            page.locator("#userNumber").fill("qweqweqwe");
+            page.locator("#subjectsInput").fill("qweqweqwe");
+
         }
     }
 }
