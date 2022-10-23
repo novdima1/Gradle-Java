@@ -66,6 +66,10 @@ public class practiceForm {
         label.add("Mobile");
         label.add("Date of Birth");
         label.add("Subjects");
+        label.add("Hobbies");
+        label.add("Picture");
+        label.add("Address");
+        label.add("State and City");
 
         // Actual results for Values
         ArrayList<String> value = new ArrayList<String>();
