@@ -29,8 +29,6 @@ public class practiceForm {
         String email = "name@example.com";
         String mobileValue = "1231231231";
         String female = "Female";
-        String dataOfBirthInput = "23 Oct 2022";
-        String dataOfBirthResult = "23 October,2022";
         String subject = "subject";
         String reading = "Reading";
         String empty = "";
@@ -41,6 +39,10 @@ public class practiceForm {
         String state = "NCR";
         String city = "Noida";
         String stateAndCity = state + " " + city;
+        String month = "November";
+        String year = "2022";
+        String day = "05";
+        String dataOfBirthResult = day + " " + month + "," + year;
 
         // LOCATORS
         String studentRegistrationFormTitle = "Student Registration Form";
@@ -52,11 +54,15 @@ public class practiceForm {
         WebElement mobile = $("input[id=userNumber]");
         WebElement submit = $("[id=submit]");
         WebElement thanksText = $(byText("Thanks for submitting the form"));
-        WebElement subjects = $("input[id=subjectsInput]");
+        WebElement subjectsLocator = $("input[id=subjectsInput]");
         WebElement dateOfBirth = $("#dateOfBirthInput");
         WebElement addressLocator = $("#currentAddress");
         WebElement stateLocator = $("#state");
         WebElement cityLocator = $("#city");
+        WebElement monthSelector = $(".react-datepicker__month-select");
+        WebElement yearSelector = $(".react-datepicker__year-select");
+        String daySelector = ".react-datepicker__day.react-datepicker__day--0";
+
 
         // Actual results for Labels
         ArrayList<String> label = new ArrayList<String>();
@@ -99,6 +105,11 @@ public class practiceForm {
         $(byAttribute(placeholder, email)).setValue(email);
         gender.click();
         ((SelenideElement) mobile).setValue(mobileValue);
+        // Calendar
+        dateOfBirth.click();
+        $(monthSelector).selectOption(month);
+        $(yearSelector).selectOption(year);
+        $(daySelector + day).click();
         hobbiesLocator.click();
         File file = $("#uploadPicture").uploadFile(new File(filePath));
         ((SelenideElement) addressLocator).setValue(address);

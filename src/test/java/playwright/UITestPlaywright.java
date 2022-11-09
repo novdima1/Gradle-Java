@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.*;
 
 import java.io.File;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 
@@ -36,7 +38,6 @@ public class UITestPlaywright {
             // Click text=Trace Viewer >> nth=0
             page.locator("text=Trace Viewer").first().click();
             assertThat(page).hasURL("https://playwright.dev/docs/trace-viewer-intro");
-
             // Click text=Authentication >> nth=0
             page.locator("text=Authentication").first().click();
             assertThat(page).hasURL("https://playwright.dev/docs/auth");
@@ -50,19 +51,38 @@ public class UITestPlaywright {
     void tmpTestDemo() {
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false));
-            BrowserContext context = browser.newContext();
+                    .setHeadless(false).setArgs(List.of("--start-maximized")));
+            BrowserContext context = browser.newContext(new Browser.NewContextOptions().setViewportSize(1920,1280));
             Page page = context.newPage();
 
             page.navigate("https://demoqa.com/automation-practice-form");
+            // Remove banners
+            page.locator("$('footer').remove()");
+            page.locator("$('#fixedban').remove()");
 
-            String dataOfBirthInput = "23 Oct 2022";
+            page.getByPlaceholder("First Name").click();
+            page.getByPlaceholder("First Name").fill("Bobby");
+            page.getByPlaceholder("Last Name").click();
+            page.getByPlaceholder("Last Name").fill("Stellar");
+            page.getByPlaceholder("name@example.com").click();
+            page.getByPlaceholder("name@example.com").fill("ex_email@gmail.com");
+            page.getByText("Other").click();
+            page.getByPlaceholder("Mobile Number").click();
+            page.getByPlaceholder("Mobile Number").fill("123321123");
             page.locator("#dateOfBirthInput").click();
-            page.locator("#dateOfBirthInput").fill(dataOfBirthInput);
-
-            page.locator("#userNumber").fill("qweqweqwe");
-            page.locator("#subjectsInput").fill("qweqweqwe");
-
+            page.locator(".subjects-auto-complete__value-container").click();
+            page.locator("#subjectsInput").fill("Math");
+            page.locator("#react-select-2-option-0").click();
+            page.getByText("Sports").click();
+            page.getByText("Reading").click();
+            page.getByText("Music").click();
+            page.getByPlaceholder("Current Address").click();
+            page.getByPlaceholder("Current Address").fill("av. North, 5");
+            page.getByPlaceholder("Mobile Number").click();
+            page.getByPlaceholder("Mobile Number").fill("1233211231");
+            page.locator("#submit").click();
+            assertThat(page.locator("#example-modal-sizes-title-lg")).containsText("Thanks for submitting the form");
+            page.locator("#closeLargeModal").click();
         }
     }
 }
