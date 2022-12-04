@@ -9,30 +9,29 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class MagentoManPage {
+public class MagentoManPage extends BasePage {
 
-    @BeforeAll
-    static void setUp() {
-        Configuration.baseUrl = "https://magento.softwaretestingboard.com";
-        Configuration.browser = "chrome";
-        Configuration.timeout = 5000;
-        Configuration.browserSize = "1620x1080";
-    }
+    String MenTab = "#ui-id-5";
+    String Tops = "#ui-id-17";
+    String Jackets = "#ui-id-19";
+    String Style = "Style";
+    String RainCoat = "Rain Coat";
+
     public MagentoManPage openByURL(String url) {
         open(url);
         return this;
     }
 
     public MagentoManPage hooverMan() {
-        $("#ui-id-5").hover();
-        $("#ui-id-17").hover();
-        $("#ui-id-19").click();
+        $(MenTab).hover();
+        $(Tops).hover();
+        $(Jackets).click();
         return this;
     }
 
     public MagentoManPage selectRainCoat() {
-        $(byText("Style")).click();
-        $(withText("Rain Coat")).click();
+        $(byText(Style)).click();
+        $(withText(RainCoat)).click();
         return this;
     }
 
@@ -49,12 +48,12 @@ public class MagentoManPage {
         return this;
     }
 
-    public MagentoManPage removeItem() {
+    public void removeItem() {
         $("a[title=\"Remove item\"]").click();
         $(withText("Are you sure you would like to remove this item from the shopping cart?")).shouldBe(visible);
         $(withText("OK")).click();
         $(withText("You have no items in your shopping cart")).shouldBe(visible);
-        return this;
     }
+
 
 }
