@@ -1,15 +1,11 @@
-package selenideTest;
+package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
-public class MagentoManPage extends BasePage {
+public class ManPage extends BasePage {
 
     String MenTab = "#ui-id-5";
     String Tops = "#ui-id-17";
@@ -17,25 +13,25 @@ public class MagentoManPage extends BasePage {
     String Style = "Style";
     String RainCoat = "Rain Coat";
 
-    public MagentoManPage openByURL(String url) {
+    public ManPage openByURL(String url) {
         open(url);
         return this;
     }
 
-    public MagentoManPage hooverMan() {
+    public ManPage hooverMan() {
         $(MenTab).hover();
         $(Tops).hover();
         $(Jackets).click();
         return this;
     }
 
-    public MagentoManPage selectRainCoat() {
+    public ManPage selectRainCoat() {
         $(byText(Style)).click();
         $(withText(RainCoat)).click();
         return this;
     }
 
-    public MagentoManPage addToCart() {
+    public ManPage addToCart() {
         $("#mode-list").click();
         $("#sorter").click();
         $(withText("Price")).click();
@@ -54,6 +50,5 @@ public class MagentoManPage extends BasePage {
         $(withText("OK")).click();
         $(withText("You have no items in your shopping cart")).shouldBe(visible);
     }
-
 
 }
