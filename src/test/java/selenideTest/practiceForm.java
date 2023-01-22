@@ -1,13 +1,12 @@
 package selenideTest;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebElement;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -60,7 +59,6 @@ public class practiceForm {
         WebElement monthSelector = $(".react-datepicker__month-select");
         WebElement yearSelector = $(".react-datepicker__year-select");
         String daySelector = ".react-datepicker__day.react-datepicker__day--0";
-
 
         // Actual results for Labels
         ArrayList<String> label = new ArrayList<String>();
