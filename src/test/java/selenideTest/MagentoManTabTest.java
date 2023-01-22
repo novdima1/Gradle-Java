@@ -14,4 +14,18 @@ public class MagentoManTabTest {
             .addToCart()
             .removeItem();
     }
+
+    @Test
+    void login() {
+        MagentoManPage page = new MagentoManPage();
+        page
+                .openByURL(URL);
+    }
+
+    @Test
+    void logout() {
+        MagentoManPage page = new MagentoManPage();
+        page
+                .openByURL(URL);
+    }
 }
