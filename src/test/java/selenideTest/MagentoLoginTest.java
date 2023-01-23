@@ -5,8 +5,6 @@ import pages.StartPage;
 import pages.WelcomePage;
 
 public class MagentoLoginTest {
-    String URL = "https://magento.softwaretestingboard.com/men/tops-men/jackets-men.html";
-
     @Test
     void checkLogin() {
         StartPage hp = new StartPage();
