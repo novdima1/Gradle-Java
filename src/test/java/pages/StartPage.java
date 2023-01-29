@@ -27,6 +27,7 @@ public class StartPage {
         return this;
     }
 
+
     public void signIn() {
         $(withText(signInButton)).click();
         $(email).setValue(EMAIL);
@@ -34,4 +35,31 @@ public class StartPage {
         $(byXpath(signInButton2)).click();
     }
 
+    public static class LoginParams extends StartPage {
+        String login;
+        String pass;
+        String url;
+
+        public LoginParams(String url, String login, String pass) {
+            super();
+            this.url = url;
+            this.login = login;
+            this.pass = pass;
+        }
+
+        public StartPage signInWithParameters() {
+            $(withText(signInButton)).click();
+            $(email).setValue(login);
+            $(password).setValue(pass);
+            $(byXpath(signInButton2)).click();
+            return this;
+        }
+
+        public LoginParams openHomePageParam() {
+            open(url);
+            return this;
+        }
+
+
+    }
 }
